@@ -17,7 +17,7 @@ const FirstSection = ({open, setOpen}) => {
   const skills =["Full stack Developer","Problem Solving","learner"]
 
   return (
-    <div className="lg:mt-28 mt-20 md:mt-20  z-0 lg:w-full">
+    <div className="lg:mt-28 mt-10 md:mt-20  z-0 lg:w-full">
       <div className="flex items-center w-full justify-between flex-col lg:flex-row ">
         <div className=" flex flex-col items-start gap-2 lg:w-2/5 w-full">
           <img
@@ -25,12 +25,11 @@ const FirstSection = ({open, setOpen}) => {
             alt="subject.png"
             className="w-3/6 h-2/4 right-0 top-32 z-10 object-contain scale-[1] absolute lg:hidden"
           />
-          <h1 className="text-6xl lg:text-8xl font-mooli text-white font-semibold my-4 bg-transparent z-30">
+          <h1 className="xs:text-4xl md:text-6xl lg:text-8xl font-mooli text-white font-semibold my-4 bg-transparent z-30">
             Arijit Panda,
           </h1>
-          <p className="text-gray-100 font-normal text-md z-40 w-10/12 lg:3/12">
-            some words for me good words.e,phasiszedsome <br></br> words for me good
-            words.e,phasiszedsome words for me good words.e,phasiszedsome words for me good
+          <p className="text-gray-100 font-normal  text-sm lg:text-md z-40 w-10/12 lg:3/12">
+            Developer <br></br> Student.e,phasiszedsome words for me good words.e,phasiszedsome words for me good
             words.e,phasiszedsome words for me good words.e,phasiszed
           </p>
           <div className="mt-6 w-full my-6 z-40">

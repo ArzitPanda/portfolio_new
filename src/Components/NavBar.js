@@ -1,6 +1,7 @@
 import React from 'react'
 import icon from "../img/logo.png"
 import { useNavigate } from 'react-router-dom'
+import { motion } from "framer-motion"
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -15,9 +16,16 @@ const NavBar = () => {
        <a target='_blank' href='https://linktr.ee/arzit' className='text-gray-400 hover:text-white cursor-pointer'>Socials</a>
        
       </div>
-      <div>
+      <motion.div
+       whileHover={{
+        scale: 1.2,
+        transition: { duration: .5,bounce:1 },
+      }}
+     
+      whileTap={{ scale: 0.9 }}
+      >
         <a className='border lg:px-8 lg:py-3 border-white rounded-3xl  px-4 py-2 font-mooli font-semibold  text-white cursor-pointer'  href="https://drive.google.com/file/d/15RootsE4jA2rbrHeBYLiY4se-nY9b9is/view?usp=sharing"  target='_blank' >My Resume</a>
-      </div>
+      </motion.div>
     </div>
   )
 }

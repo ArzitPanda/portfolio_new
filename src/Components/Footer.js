@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {GrUserAdmin} from 'react-icons/gr'
 
+
 const Footer = ({open,setOpen}) => {
   return (
   

@@ -11,7 +11,7 @@ import Skills from './Components/Skills';
 function App() {
   const[open,setOpen]=useState(false);
   return (
-  <>
+  <div className="overflow-x-hidden">
     <Hero open={open} setOpen={setOpen}/>
     <div className='xl:py-6 my-6'></div>
     <Feature/>
@@ -22,7 +22,7 @@ function App() {
       <ContactMe open={open} setOpen={setOpen}/>
       
 </div>
-  </>
+  </div>
   );
 }
 

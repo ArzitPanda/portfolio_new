@@ -6,7 +6,7 @@ import {GrUserAdmin} from 'react-icons/gr'
 const Footer = ({open,setOpen}) => {
   return (
   
-    <div className="w-screen min-h-screen flex items-end justify-center bg-black font-mooli">
+    <div className="w-screen min-h-[450px] flex items-end justify-center bg-black font-mooli">
             <div className="md:w-11/12 w-full px-4 text-white flex flex-col">
                 <div className="w-full text-4xl md:text-6xl lg:text-7xl font-bold">
                     <h1 className="w-full md:w-2/3">Hope You Can Understand !</h1>
@@ -24,7 +24,7 @@ const Footer = ({open,setOpen}) => {
                         <h1 classNameName='font-mooli font-bold text-yellow-500 text-3xl'>Arz</h1>  
                              </Link>
                         </div>
-                        <a className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase" href='https://drive.google.com/file/d/15RootsE4jA2rbrHeBYLiY4se-nY9b9is/view?usp=sharing'>About</a>
+                        <a className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase" href='ArijitPanda.pdf'>About</a>
                         <a className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase" href="https://github.com/ArzitPanda">Projects</a>
                         {/* <a className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase">Why us</a> */}
                         <a className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase" href='https://linktr.ee/arzit'>Contact</a>

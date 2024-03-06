@@ -78,7 +78,7 @@ client.fetch('*[_type=="work"]').then((res)=>{setExp(res);console.log("expreienc
 
            
           </div>
-          <img className="mx-auto -mt-36 md:-mt-36" src="https://user-images.githubusercontent.com/54521023/116968861-ef21a000-acd2-11eb-95ac-a34b5b490265.png"  alt="omg"/>
+          <img className="mx-auto -mt-12 md:-mt-12" src="https://user-images.githubusercontent.com/54521023/116968861-ef21a000-acd2-11eb-95ac-a34b5b490265.png"  alt="omg"/>
         </div>
       </div>
     </div>

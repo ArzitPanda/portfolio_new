@@ -3,6 +3,8 @@ import { BsArrowLeftCircleFill } from 'react-icons/bs'
 import client from '../Sanity/Client';
 import Card from './Card';
 import { useNavigate } from "react-router-dom";
+import Footer from './Footer';
+import ContactMe from './ContactMe';
 
 const Project = () => {
 
@@ -19,10 +21,11 @@ const Project = () => {
           .catch((err) => console.log(err))
       }, [])
 
-
+      const[open,setOpen]=useState(false);
 
   return (
-    <div className='text-white w-screen h-screen flex items-start flex-col justify-start p-12 ' >
+  <div className=' w-screen '>
+      <div className='text-white w-full h-full flex items-start flex-col justify-start p-12  ' >
             <div className='w-full h-28 cursor-pointer my-6'>  <BsArrowLeftCircleFill color='#D5F60C' className='w-10 h-10' 
             
             onClick={()=>{
@@ -38,8 +41,15 @@ const Project = () => {
         })}
 
             </div>
-      
+    
     </div>
+
+    <Footer open={open} setOpen={setOpen}/>
+    <div className='z-50'>
+      <ContactMe open={open} setOpen={setOpen}/>
+      
+</div>
+  </div>
   )
 }
 

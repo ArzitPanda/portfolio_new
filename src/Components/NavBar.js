@@ -24,7 +24,7 @@ const NavBar = () => {
      
       whileTap={{ scale: 0.9 }}
       >
-        <a className='border lg:px-8 lg:py-3 border-white rounded-3xl  px-4 py-2 font-mooli font-semibold  text-white cursor-pointer'  href="https://drive.google.com/file/d/15RootsE4jA2rbrHeBYLiY4se-nY9b9is/view?usp=sharing"  target='_blank' >My Resume</a>
+        <a className='border lg:px-8 lg:py-3 border-white rounded-3xl  px-4 py-2 font-mooli font-semibold  text-white cursor-pointer'  href="ArijitPanda.pdf"  target='_blank' >My Resume</a>
       </motion.div>
     </div>
   )

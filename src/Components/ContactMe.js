@@ -30,34 +30,33 @@ const ContactMe = ({open,setOpen}) => {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <div className='w-11/12 h-11/12 md:w-96 md:h-96 bg-white flex flex-col items-center justify-evenly py-2 mx-auto rounded-xl'>
+        <div className='w-11/12  h-[300px]  md:h-11/12 md:w-96 md:h-96 bg-white flex flex-col items-center justify-evenly  mx-auto rounded-xl'>
+        <h1 className='font-semibold text-lg font-mooli'>connect with me</h1>
           <div className='flex flex-col h-32 mx-auto'>
-            <h1 className='font-semibold text-lg font-mooli'>connect with me</h1>
-            <div className='flex flex-row w-full items-center justify-between'>
-                  <a href="https://twitter.com/PandaArzit">
-                    <BsTwitter className='hover:text-blue-600'/>
+       
+            <div className='flex flex-row w-full items-center justify-center flex-wrap  gap-x-12 gap-y-8 px-2'>
+                  <a href="https://twitter.com/PandaArzit" >
+                    <BsTwitter className='hover:text-blue-600 w-[40px] h-[40px] md:w-[70px] md:h-[70px]'/>
                   </a>
                   <a href="https://www.instagram.com/__arzit__/">
-                  <BsInstagram  className='hover:text-pink-600'/>
+                  <BsInstagram  className='hover:text-pink-600 w-[40px] h-[40px] md:w-[70px] md:h-[70px]' />
 
                   </a>
                   <a href="https://www.facebook.com/profile.php?id=100074349810465">
-                    <BsFacebook className='hover:text-violet-900'/>
+                    <BsFacebook className='hover:text-blue-500 w-[40px] h-[40px] md:w-[70px] md:h-[70px]'/>
                   </a>
                   <a href="https://www.linkedin.com/in/arijit-panda-a89b2721a/">
-                    <BsLinkedin className='hover:text-blue-600'/></a>
+                    <BsLinkedin className='hover:text-blue-800 w-[40px] h-[40px] md:w-[70px] md:h-[70px]'/></a>
                   <a href="https://github.com/ArzitPanda">
-                    <BsGithub className='hover:text-green-600'/>
+                    <BsGithub className='hover:text-green-600 w-[40px] h-[40px] md:w-[70px] md:h-[70px]'/>
                   </a>
 
 
             </div>
            
           </div>
-          <div className='w-full'>
-            <img src={crack} className='w-3/12 h-2/12 -rotate-45 object-contain' alt="crack"/>
-          </div>
-          <div className='flex flex-col'>
+        
+          <div className='flex flex-col mt-6'>
             <div className='text-md font-mooli'>
                 mail me:
             </div>

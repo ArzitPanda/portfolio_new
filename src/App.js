@@ -7,13 +7,14 @@ import Feature from './Components/Feature';
 import Footer from './Components/Footer';
 import Hero from './Components/Hero';
 import Skills from './Components/Skills';
+import Explore from './Components/Explore';
 
 function App() {
   const[open,setOpen]=useState(false);
   return (
   <div className="overflow-x-hidden">
     <Hero open={open} setOpen={setOpen}/>
-    <div className='xl:py-6 my-6'></div>
+    <Explore/>
     <Feature/>
     <Skills/>
     <Experience/>

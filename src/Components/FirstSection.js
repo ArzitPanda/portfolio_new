@@ -34,7 +34,7 @@ const FirstSection = ({open, setOpen}) => {
           </h1>
           <div className="text-gray-100 font-normal  text-sm lg:text-md z-40 w-10/12 lg:3/12">
            <span className='text-slate-800 bg-white px-5 py-2 rounded-3xl font-bold my-4'>Developer</span>  <br></br> 
-           <div className='my-6 font-mono font-semibold text-lg text-clip backdrop-blur-md  rounded-md lg:rounded-xl  bg-blend-darken py-6 px-8  
+           <div className='my-6 font-mono font-semibold text-md lg:text-lg text-clip backdrop-blur-md  rounded-md lg:rounded-xl  bg-blend-darken py-6 px-2  
            
            border-l-2 border-l-slate-800
            

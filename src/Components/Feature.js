@@ -13,7 +13,7 @@ const Feature = () => {
       .fetch(`*[_type == "project"][0..2] `)
       .then((res) => {
         setProjects(res);
-        console.log(res)
+     
       })
       .catch((err) => console.log(err))
   }, [])

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 const Experience = () => {
     const [exp,setExp]=useState([]);
     useEffect(()=>{
-client.fetch('*[_type=="work"]').then((res)=>{setExp(res);console.log("expreience",exp)}).catch(err=>console.log(err))
+client.fetch('*[_type=="work"]').then((res)=>{setExp(res)}).catch(err=>console.log(err))
 
     },[])
 
@@ -34,14 +34,14 @@ client.fetch('*[_type=="work"]').then((res)=>{setExp(res);console.log("expreienc
             <div className="border-2-2 border-yellow-555 absolute h-full border"
               style={{right:"50%",border:"2px solid #FFC100" ,borderRadius:'1%'}}></div>
            {
-            exp.map((ele,idx)=>{return(<>
+            exp.map((ele,idx)=>{return(<div  key={idx}>
                 {
                     idx%2===0? ( <motion.div initial={{opacity:0,translateY:-40}}
                        whileInView={{opacity:1,translateY:0}}
                        transition={{duration:2,type:'spring'}}
                        exit={{opacity:0,translateX:-40}}
                     
-                    key={idx} className="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                    className="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
                     <div className="order-1 w-5/12"></div>
                     <div className="order-1 w-5/12 px-1 py-4 text-right">
                       <p className="mb-3 text-base text-yellow-300">start Date: {ele.startdate}. end Date:{ele.enddate}</p>
@@ -72,7 +72,7 @@ client.fetch('*[_type=="work"]').then((res)=>{setExp(res);console.log("expreienc
                 }
             
             
-            </>)})
+            </div>)})
            }
             
 

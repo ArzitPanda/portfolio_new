@@ -21,7 +21,7 @@ const Footer = ({open,setOpen}) => {
                     <div className="flex mt-24 mb-12 flex-row justify-between">
                         <div className="">
                         <Link to="admin">
-                        <h1 classNameName='font-mooli font-bold text-yellow-500 text-3xl'>Arz</h1>  
+                        <h1 className='font-mooli font-bold text-yellow-500 text-3xl'>Arz</h1>  
                              </Link>
                         </div>
                         <a className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase" href='ArijitPanda.pdf'>About</a>

@@ -13,10 +13,10 @@ const Project = () => {
     const [allP,setAllP]=useState([]);
     useEffect(() => {
         client
-          .fetch(`*[_type == "project"]`)
+          .fetch(`*[_type == "project"] | order(_updatedAt desc)`)
           .then((res) => {
             setAllP(res);
-            console.log(res)
+        
           })
           .catch((err) => console.log(err))
       }, [])

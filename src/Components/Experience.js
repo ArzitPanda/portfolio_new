@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 const Experience = () => {
     const [exp,setExp]=useState([]);
     useEffect(()=>{
-client.fetch('*[_type=="work"]').then((res)=>{setExp(res)}).catch(err=>console.log(err))
+client.fetch('*[_type=="work"]').then((res)=>{
+  setExp(res)}).catch(err=>console.log(err))
+
 
     },[])
 
@@ -18,7 +20,7 @@ client.fetch('*[_type=="work"]').then((res)=>{setExp(res)}).catch(err=>console.l
     <div className="container mx-auto flex flex-col items-start md:flex-row my-12 md:my-24">
       <div className="flex flex-col w-full sticky md:top-36 lg:w-1/3 mt-2 md:mt-12 px-8 font-mooli">
         <p className="ml-2 text-yellow-300 uppercase tracking-loose">Work Experience</p>
-        <p className="text-3xl md:text-4xl leading-normal md:leading-relaxed mb-2">as a student</p>
+        <p className="text-3xl md:text-4xl leading-normal md:leading-relaxed mb-2">As a Developer</p>
         <p className="text-sm md:text-base text-gray-50 mb-4">
          Here are some organisation where i contributed and enhance my skills
         </p>
@@ -33,47 +35,56 @@ client.fetch('*[_type=="work"]').then((res)=>{setExp(res)}).catch(err=>console.l
               style={{right:"50%",border:"2px solid #FFC100" ,borderRadius:'1%'}}></div>
             <div className="border-2-2 border-yellow-555 absolute h-full border"
               style={{right:"50%",border:"2px solid #FFC100" ,borderRadius:'1%'}}></div>
-           {
-            exp.map((ele,idx)=>{return(<div  key={idx}>
-                {
-                    idx%2===0? ( <motion.div initial={{opacity:0,translateY:-40}}
-                       whileInView={{opacity:1,translateY:0}}
-                       transition={{duration:2,type:'spring'}}
-                       exit={{opacity:0,translateX:-40}}
-                    
-                    className="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
-                    <div className="order-1 w-5/12"></div>
-                    <div className="order-1 w-5/12 px-1 py-4 text-right">
-                      <p className="mb-3 text-base text-yellow-300">start Date: {ele.startdate}. end Date:{ele.enddate}</p>
-                      <h4 className="mb-3 font-bold text-lg md:text-2xl">{ele.company_name}</h4>
-                      <h4 className="mb-3 font-bold text-md md:text-xl text-yellow-200 font-mooli">{ele.title}</h4>
-                      <p className="text-xs md:text-base leading-snug text-gray-50 text-opacity-100">
-                       {ele.description}
-                      </p>
-                    </div>
-                  </motion.div>):(   <motion.div
-                 initial={{opacity:0,translateY:40}}
-                  whileInView={{opacity:1,translateY:0}}
-                  transition={{duration:3,type:'spring'}}
-                  exit={{opacity:0,translateX:40}}
-                  
-                  
-                  className="mb-8 flex justify-between items-center w-full right-timeline">
-              <div className="order-1 w-5/12"></div>
-              <div className="order-1  w-5/12 px-1 py-4 text-left">
-                <p className="mb-3 text-base text-yellow-300">start Date: {ele.startdate}. end Date:{ele.enddate}1</p>
-                <h4 className="mb-3 font-bold text-lg md:text-2xl font-mooli">{ele.company_name}</h4>
-                <h4 className="mb-3 font-bold text-md md:text-xl text-yellow-200">{ele.title}</h4>
-                <p className="text-xs md:text-base leading-snug text-gray-50 text-opacity-100">
+        {
+  exp
+    ?.sort((a, b) =>Date.parse(b?._createdAt)- Date.parse(a?._createdAt) )
+    .map((ele, idx) => (
+      <div key={idx}>
+        {idx % 2 === 0 ? (
+          <motion.div
+            initial={{ opacity: 0, translateY: -40 }}
+            whileInView={{ opacity: 1, translateY: 0 }}
+            transition={{ duration: 2, type: 'spring' }}
+            exit={{ opacity: 0, translateX: -40 }}
+            className="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline"
+          >
+            <div className="order-1 w-5/12"></div>
+            <div className="order-1 w-5/12 px-1 py-4 text-right">
+              <p className="mb-3 text-base text-yellow-300">
+                Start Date: {ele.startdate}. End Date: {ele.enddate}
+              </p>
+              <h4 className="mb-3 font-bold text-lg md:text-2xl">{ele.company_name}</h4>
+              <h4 className="mb-3 font-bold text-md md:text-xl text-yellow-200 font-mooli">{ele.title}</h4>
+              <p className="text-xs md:text-base leading-snug text-gray-50 text-opacity-100">
                 {ele.description}
-                </p>
-              </div>
-            </motion.div>)
-                }
-            
-            
-            </div>)})
-           }
+              </p>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, translateY: 40 }}
+            whileInView={{ opacity: 1, translateY: 0 }}
+            transition={{ duration: 3, type: 'spring' }}
+            exit={{ opacity: 0, translateX: 40 }}
+            className="mb-8 flex justify-between items-center w-full right-timeline"
+          >
+            <div className="order-1 w-5/12"></div>
+            <div className="order-1 w-5/12 px-1 py-4 text-left">
+              <p className="mb-3 text-base text-yellow-300">
+                Start Date: {ele.startdate}. End Date: {ele.enddate}
+              </p>
+              <h4 className="mb-3 font-bold text-lg md:text-2xl font-mooli">{ele.company_name}</h4>
+              <h4 className="mb-3 font-bold text-md md:text-xl text-yellow-200">{ele.title}</h4>
+              <p className="text-xs md:text-base leading-snug text-gray-50 text-opacity-100">
+                {ele.description}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    ))
+}
+
             
 
            

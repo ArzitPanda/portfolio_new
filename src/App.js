@@ -8,6 +8,7 @@ import Footer from './Components/Footer';
 import Hero from './Components/Hero';
 import Skills from './Components/Skills';
 import Explore from './Components/Explore';
+import Reviews from './Components/Reviews';
 
 function App() {
   const[open,setOpen]=useState(false);
@@ -17,6 +18,7 @@ function App() {
     <Explore/>
     <Feature/>
     <Skills/>
+    <Reviews/>
     <Experience/>
     <Footer open={open} setOpen={setOpen}/>
     <div className='z-50'>

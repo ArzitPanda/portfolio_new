@@ -9,6 +9,8 @@ import {
 } from "react-router-dom";
 import Project from './Components/Project';
 import AdminPssword from './Components/AdminPssword';
+import AdminReviewForm from './Components/Admin/AdminReviewForm';
+import UserReviewForm from './Components/UserReviewForm';
 // import reportWebVitals \from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
   {
     path:"/admin",
     element:<AdminPssword/>
+  },
+  {
+    path:"/review/:id",
+    element:<UserReviewForm/>
+  },
+  {
+    path:"/admin/review/link",
+    element: <AdminReviewForm/>
   }
 ]);
 

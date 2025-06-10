@@ -38,7 +38,7 @@ const Reviews = () => {
   return (
     <div className="flex w-full flex-col items-center justify-center p-6 bg-black min-h-screen">
       <h1 className="font-mooli text-4xl md:text-5xl font-bold text-yellow-400 mb-12">What People Say</h1>
-
+        {reviews.length===0 &&<div> nothing...😅</div> }
       <div className="flex gap-10 w-full items-center justify-center flex-wrap lg:max-w-5xl">
         <AnimatePresence mode="wait">
           {currentReviews.map((review) => (

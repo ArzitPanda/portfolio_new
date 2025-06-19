@@ -7,18 +7,34 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 3;
-
+  const CACHE_KEY = 'cached_reviews_data';
+  const CACHE_EXPIRY_KEY = 'cached_reviews_expiry';
+  const CACHE_DURATION = 1000 * 60 * 5;
   useEffect(() => {
-    const fetchReviews = async () => {
-      const query = `*[_type == "review" && defined(comment)] | order(_updatedAt desc)`;
-      const data = await client.fetch(query);
-  
-      // Filter in JS: only comments with at least 10 characters
-      const filtered = data.filter(review => review.comment && review.comment.length >= 10);
-      setReviews(filtered);
-    };
-  
-    fetchReviews();
+    const now = Date.now();
+    const cachedData = sessionStorage.getItem(CACHE_KEY);
+    const cachedExpiry = sessionStorage.getItem(CACHE_EXPIRY_KEY);
+
+    if (cachedData && cachedExpiry && now < parseInt(cachedExpiry)) {
+      // ✅ Use cached data
+      setReviews(JSON.parse(cachedData));
+    } else {
+      // 🔄 Fetch from Sanity and filter
+      const fetchReviews = async () => {
+        const query = `*[_type == "review" && defined(comment)] | order(_updatedAt desc)`;
+        try {
+          const data = await client.fetch(query);
+          const filtered = data.filter(review => review.comment?.length >= 10);
+          setReviews(filtered);
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(filtered));
+          sessionStorage.setItem(CACHE_EXPIRY_KEY, (now + CACHE_DURATION).toString());
+        } catch (err) {
+          console.error('Error fetching reviews:', err);
+        }
+      };
+
+      fetchReviews();
+    }
   }, []);
   
 

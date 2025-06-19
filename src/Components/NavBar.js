@@ -3,7 +3,7 @@ import icon from "../img/logo.png"
 import { useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion"
 
-const NavBar = () => {
+const NavBar = ({hero}) => {
   const navigate = useNavigate();
   return (
     <div className='flex flex-row w-10/12  h-28 items-center justify-between  absolute top-0 z-50 '>
@@ -24,7 +24,7 @@ const NavBar = () => {
      
       whileTap={{ scale: 0.9 }}
       >
-        <a className='border lg:px-8 lg:py-3 border-white rounded-3xl  px-4 py-2 font-mooli font-semibold  text-white cursor-pointer'  href="arijitPanda.pdf"  target='_blank' >My Resume</a>
+        <a className='border lg:px-8 lg:py-3 border-white rounded-3xl  px-4 py-2 font-mooli font-semibold  text-white cursor-pointer' href={hero?.resume?.asset?.url}   target='_blank' >My Resume</a>
       </motion.div>
     </div>
   )

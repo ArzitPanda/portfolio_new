@@ -4,21 +4,34 @@ import 'react-awesome-slider/dist/styles.css'
 import Slider from 'react-slick'
 import client, { urlFor } from '../Sanity/Client'
 import ProgressBar from '@ramonak/react-progress-bar'
-
+const CACHE_KEY = 'cached_skills_data';
+const CACHE_EXPIRY_KEY = 'cached_skills_expiry';
+const CACHE_DURATION = 1000 * 60 * 60 * 2;
 const Skills = () => {
   const [skillset, setSkillSet] = useState([])
 
   useEffect(() => {
-    client
-      .fetch('*[_type == "skills"] ')
-      .then((res) => {
-        setSkillSet(res)
-    
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
+    const now = new Date().getTime();
+    const cachedData = sessionStorage.getItem(CACHE_KEY);
+    const cachedExpiry = sessionStorage.getItem(CACHE_EXPIRY_KEY);
+
+    if (cachedData && cachedExpiry && now < parseInt(cachedExpiry)) {
+      // ✅ Use cached data
+      setSkillSet(JSON.parse(cachedData));
+    } else {
+      // 🔄 Fetch from Sanity and cache it
+      client
+          .fetch(`*[_type == "skills"]`)
+          .then((res) => {
+            setSkillSet(res);
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify(res));
+            sessionStorage.setItem(CACHE_EXPIRY_KEY, (now + CACHE_DURATION).toString());
+          })
+          .catch((err) => {
+            console.error('Error fetching skills:', err);
+          });
+    }
+  }, []);
 
   return (
     <div className='flex flex-col items-center justify-center'>

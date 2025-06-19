@@ -4,19 +4,32 @@ import client from '../Sanity/Client'
 import {BsArrowRightCircleFill} from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 // import  ImageUrlBuilder  from '@sanity/image-url';
-
+const CACHE_KEY = 'cached_projects_data';
+const CACHE_EXPIRY_KEY = 'cached_projects_expiry';
+const CACHE_DURATION = 1000 * 60 * 60;
 const Feature = () => {
-  const [projects, setProjects] = useState([])
+    const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
-    client
-      .fetch(`*[_type == "project"][0..2] `)
-      .then((res) => {
-        setProjects(res);
-     
-      })
-      .catch((err) => console.log(err))
-  }, [])
+    useEffect(() => {
+        const now = new Date().getTime();
+        const cachedData = sessionStorage.getItem(CACHE_KEY);
+        const cachedExpiry = sessionStorage.getItem(CACHE_EXPIRY_KEY);
+
+        if (cachedData && cachedExpiry && now < parseInt(cachedExpiry)) {
+            // ✅ Use cached data
+            setProjects(JSON.parse(cachedData));
+        } else {
+            // 🔄 Fetch from Sanity
+            client
+                .fetch(`*[_type == "project"][0..2]`)
+                .then((res) => {
+                    setProjects(res);
+                    sessionStorage.setItem(CACHE_KEY, JSON.stringify(res));
+                    sessionStorage.setItem(CACHE_EXPIRY_KEY, (now + CACHE_DURATION).toString());
+                })
+                .catch((err) => console.log('Error fetching projects:', err));
+        }
+    }, []);
 
   return (
     <div className="w-screen flex flex-col items-center justify-center gap-7 my-32 md:my-10 lg:my-20">

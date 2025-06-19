@@ -8,18 +8,31 @@ import ContactMe from './ContactMe';
 
 const Project = () => {
 
-
+    const CACHE_KEY = 'cached_all_projects';
+    const CACHE_EXPIRY_KEY = 'cached_all_projects_expiry';
+    const CACHE_DURATION = 1000 * 60 * 60;
   const navigate = useNavigate();
     const [allP,setAllP]=useState([]);
     useEffect(() => {
-        client
-          .fetch(`*[_type == "project"] | order(_updatedAt desc)`)
-          .then((res) => {
-            setAllP(res);
-        
-          })
-          .catch((err) => console.log(err))
-      }, [])
+        const now = new Date().getTime();
+        const cachedData = sessionStorage.getItem(CACHE_KEY);
+        const cachedExpiry = sessionStorage.getItem(CACHE_EXPIRY_KEY);
+
+        if (cachedData && cachedExpiry && now < parseInt(cachedExpiry)) {
+            // ✅ Use cached data
+            setAllP(JSON.parse(cachedData));
+        } else {
+            // 🔄 Fetch fresh data from Sanity
+            client
+                .fetch(`*[_type == "project"] | order(_updatedAt desc)`)
+                .then((res) => {
+                    setAllP(res);
+                    sessionStorage.setItem(CACHE_KEY, JSON.stringify(res));
+                    sessionStorage.setItem(CACHE_EXPIRY_KEY, (now + CACHE_DURATION).toString());
+                })
+                .catch((err) => console.error('Error fetching all projects:', err));
+        }
+    }, []);
 
       const[open,setOpen]=useState(false);
 

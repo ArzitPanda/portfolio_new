@@ -1,20 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import sanityClient from '../Sanity/Client'
 import { motion } from "framer-motion"
-
+const CACHE_KEY = 'cached_explore_data';
+const CACHE_EXPIRY_KEY = 'cached_explore_expiry';
+const CACHE_DURATION = 1000 * 60 * 60;
 const Explore = () => {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    sanityClient
-      .fetch(`*[_type == "explore"]{
-        index,
-        text,
-        "imgUrl": img.asset->url
-      }`)
-      .then((res) => setData(res))
-      .catch(console.error);
-  }, []);
+    useEffect(() => {
+        const now = new Date().getTime();
+        const cachedData = sessionStorage.getItem(CACHE_KEY);
+        const cachedExpiry = sessionStorage.getItem(CACHE_EXPIRY_KEY);
+
+        if (cachedData && cachedExpiry && now < parseInt(cachedExpiry)) {
+            // ✅ Use cached data
+            setData(JSON.parse(cachedData));
+        } else {
+            // 🔄 Fetch from Sanity
+            sanityClient
+                .fetch(`*[_type == "explore"]{
+          index,
+          text,
+          "imgUrl": img.asset->url
+        }`)
+                .then((res) => {
+                    setData(res);
+                    sessionStorage.setItem(CACHE_KEY, JSON.stringify(res));
+                    sessionStorage.setItem(CACHE_EXPIRY_KEY, (now + CACHE_DURATION).toString());
+                })
+                .catch(console.error);
+        }
+    }, []);
 
   return (
     <div className="w-screen flex flex-col items-center justify-center gap-7 my-32 md:my-10 lg:my-20">

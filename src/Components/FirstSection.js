@@ -7,54 +7,13 @@ import { motion } from 'framer-motion';
 
 import client from '../Sanity/Client'
 
-const CACHE_KEY = 'hero_data'
-const CACHE_EXPIRY_KEY = 'hero_data_expiry'
-const CACHE_DURATION = 1000 * 60 * 60 * 4 
-const FirstSection = ({open, setOpen}) => {
+
+const FirstSection = ({open, setOpen,hero,setHero}) => {
 
 
 
   const { scrollY } = useScroll();
   // console.log(scrollY)
-
-  const arr = [
-    {
-      name: 'projects',
-      count: '20',
-    },
-    {
-      name: 'internships',
-      count: '3',
-    },
-  
-  ]
-
-
-  const [hero, setHero] = useState(null)
-
-  useEffect(() => {
-    const cached = sessionStorage.getItem(CACHE_KEY)
-    const expiry = sessionStorage.getItem(CACHE_EXPIRY_KEY)
-
-    if (cached && expiry && new Date().getTime() < Number(expiry)) {
-      setHero(JSON.parse(cached))
-    } else {
-      client
-        .fetch(
-          `*[_type == "hero"][0]{
-            name,
-            tag,
-            description,
-            buttonText
-          }`
-        )
-        .then((data) => {
-          setHero(data)
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify(data))
-          sessionStorage.setItem(CACHE_EXPIRY_KEY, (new Date().getTime() + CACHE_DURATION).toString())
-        })
-    }
-  }, [])
 
 
   const handleClick = () => {

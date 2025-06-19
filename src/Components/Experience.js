@@ -4,13 +4,29 @@ import { motion } from 'framer-motion';
 
 const Experience = () => {
     const [exp,setExp]=useState([]);
-    useEffect(()=>{
-client.fetch('*[_type=="work"]').then((res)=>{
-  setExp(res)}).catch(err=>console.log(err))
+  const CACHE_KEY = 'cached_experience_data';
+  const CACHE_EXPIRY_KEY = 'cached_experience_expiry';
+  const CACHE_DURATION = 1000 * 60 * 60;
+  useEffect(() => {
+    const now = new Date().getTime();
+    const cachedData = sessionStorage.getItem(CACHE_KEY);
+    const cachedExpiry = sessionStorage.getItem(CACHE_EXPIRY_KEY);
 
-
-    },[])
-
+    if (cachedData && cachedExpiry && now < parseInt(cachedExpiry)) {
+      // ✅ Use cached data
+      setExp(JSON.parse(cachedData));
+    } else {
+      // 🔄 Fetch from Sanity and cache it
+      client
+          .fetch(`*[_type == "work"]`)
+          .then((res) => {
+            setExp(res);
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify(res));
+            sessionStorage.setItem(CACHE_EXPIRY_KEY, (now + CACHE_DURATION).toString());
+          })
+          .catch((err) => console.error('Error fetching experience data:', err));
+    }
+  }, []);
 
 
 
